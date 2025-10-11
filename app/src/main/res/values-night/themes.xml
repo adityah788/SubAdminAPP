@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.Sub_admin_app" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your dark theme here. -->
+        <item name="colorPrimary">@color/thm_darkgreenwhite</item>
+        <item name="android:statusBarColor">@color/thm_darkgreenwhite</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

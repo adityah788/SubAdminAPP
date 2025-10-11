@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:background="@drawable/bg_box"
+    android:paddingBottom="30dp">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_call_support"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Call Support"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:background="@drawable/thm_btn_back"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:translationZ="8dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginVertical="8dp"
+        android:textAllCaps="false"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_chat_admin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chat with Admin"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:background="@drawable/thm_btn_back"
+        android:layout_below="@+id/btn_call_support"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:textAllCaps="false"
+        android:layout_centerHorizontal="true"
+        android:translationZ="8dp"
+        android:layout_marginBottom="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tvBadgeRV1"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="end|top"
+        android:background="@drawable/bg_badge"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:visibility="gone"
+        android:layout_alignTop="@+id/btn_chat_admin"
+        android:layout_toEndOf="@+id/btn_chat_admin"
+        android:translationZ="20dp"/>
+</RelativeLayout>

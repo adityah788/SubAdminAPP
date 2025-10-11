@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="@color/thm_midgreendark">
+
+    <GridLayout
+        android:id="@+id/gridFeatures"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentTop="true"
+        android:columnCount="2">
+
+        <!-- Box 1 -->
+        <RelativeLayout
+            android:id="@+id/androidPhoneInstallation"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_columnWeight="1"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/bg_box"
+            android:elevation="20dp">
+
+            <ImageView
+                android:id="@+id/ivandroid"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/android"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Install on android"
+                android:layout_below="@id/ivandroid"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:textSize="14sp"
+                android:textColor="#333" />
+        </RelativeLayout>
+
+        <!-- Box 2 -->
+        <RelativeLayout
+            android:id="@+id/iphoneInstallation"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_columnWeight="1"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/bg_box"
+            android:elevation="20dp">
+
+            <ImageView
+                android:id="@+id/iviphone"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/iphone"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Install on iphone"
+                android:layout_below="@id/iviphone"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:textSize="14sp"
+                android:textColor="#333" />
+        </RelativeLayout>
+
+        <!-- Box 3 -->
+        <RelativeLayout
+            android:id="@+id/rlUsers"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_columnWeight="1"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/bg_box"
+            android:elevation="20dp">
+
+            <ImageView
+                android:id="@+id/ivusers"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/users"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Users"
+                android:layout_below="@id/ivusers"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:textSize="14sp"
+                android:textColor="#333" />
+        </RelativeLayout>
+
+        <!-- Box 4 -->
+        <RelativeLayout
+            android:id="@+id/rlYoutube"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_columnWeight="1"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/bg_box"
+            android:elevation="20dp">
+
+            <ImageView
+                android:id="@+id/ivyt"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/youtube"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Video"
+                android:layout_below="@id/ivyt"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:textSize="14sp"
+                android:textColor="#333" />
+        </RelativeLayout>
+
+        <!-- Box 5 -->
+        <RelativeLayout
+            android:id="@+id/rlContactSupport"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:layout_columnWeight="1"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="50dp"
+            android:background="@drawable/bg_box"
+            android:elevation="20dp">
+
+            <ImageView
+                android:id="@+id/ivsupport"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/support"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact Support"
+                android:layout_below="@id/ivsupport"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:textSize="14sp"
+                android:textColor="#333" />
+
+            <TextView
+                android:id="@+id/tvBadgeRV"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="end|top"
+                android:background="@drawable/bg_badge"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:visibility="gone"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"/>
+
+        </RelativeLayout>
+
+
+        <!-- Add More Boxes as Needed -->
+    </GridLayout>
+
+    <TextView
+        android:id="@+id/tvcopyright"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="© 2025 Sortcore Technology"
+        android:textColor="@color/shadow"
+        android:layout_below="@+id/gridFeatures"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        tools:ignore="HardcodedText" />
+</RelativeLayout>

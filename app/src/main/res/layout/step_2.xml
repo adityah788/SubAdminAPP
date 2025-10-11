@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentTop="true"
+        app:boxStrokeColor="@color/textinput_stroke_color"
+        android:textColorHint="@color/hint_text_color"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_dateofpurchase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Date of Purchase"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:inputType="none"
+            android:focusable="false"
+            android:clickable="true"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/textInputLayout15"
+        app:boxStrokeColor="@color/textinput_stroke_color"
+        android:textColorHint="@color/hint_text_color"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_phonePrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mobile Price (Total Amount)"
+            android:inputType="textPersonName"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/textInputLayout13"
+        app:boxStrokeColor="@color/textinput_stroke_color"
+        android:textColorHint="@color/hint_text_color"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_advancedPayment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Advanced Payment"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:inputType="phone"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/textInputLayout14"
+        app:boxStrokeColor="@color/textinput_stroke_color"
+        android:textColorHint="@color/hint_text_color"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_emiAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="EMI Amount"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:inputType="textPostalAddress"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout17"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/textInputLayout16"
+        app:boxStrokeColor="@color/textinput_stroke_color"
+        android:textColorHint="@color/hint_text_color"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_totalEmis"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Total EMIs"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            android:inputType="text"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/l2_btn_preview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Preview"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textAllCaps="false"
+        android:background="@drawable/thm_btn_back"
+        android:layout_below="@+id/textInputLayout17"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:translationZ="8dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/l2_btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textAllCaps="false"
+        android:background="@drawable/thm_btn_back"
+        android:layout_below="@+id/textInputLayout17"
+        android:layout_alignParentEnd="true"
+        android:layout_alignEnd="@+id/l2_btn_preview"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginHorizontal="20dp"
+        android:translationZ="8dp"/>
+
+    </RelativeLayout>
+
+</ScrollView>

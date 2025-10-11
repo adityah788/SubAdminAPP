@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_whitebox"
+    android:paddingHorizontal="10dp"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="10dp"
+    android:translationZ="8dp">
+
+    <TextView
+        android:id="@+id/tv_notificationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="14sp"
+        android:text="Makadia Smit KiritbhaiMakadia Smit KiritMakadia Smit KiritbhaiMakadia Smit KiritbhaiMakadia Smit KiritbhaiMakadia Smit KiritbhaiMakadia Smit Kiritbhai"
+        android:textColor="@color/middark_gray"
+        android:layout_marginBottom="10dp"/>
+    
+    <TextView
+        android:id="@+id/tv_datetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date Time"
+        android:textColor="@color/shadow"
+        android:textSize="14sp"
+        android:layout_below="@+id/tv_notificationText"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"/>
+
+
+</RelativeLayout>
