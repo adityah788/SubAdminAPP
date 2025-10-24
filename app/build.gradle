@@ -56,4 +56,9 @@ dependencies {
     implementation'com.linkedin.android.litr:litr:1.4.19'
     implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
     implementation 'com.google.zxing:core:3.5.1'
+
+    implementation 'com.firebaseui:firebase-ui-storage:8.0.0' // Check for the latest version
+
+    // Your existing Firebase Storage SDK dependency
+    implementation 'com.google.firebase:firebase-storage:20.3.0'
 }

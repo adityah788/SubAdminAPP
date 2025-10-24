@@ -1139,9 +1139,102 @@
             </GridLayout>
 
 
-
-
         </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tv_prevent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/rl7"
+                android:layout_alignTop="@+id/rl8"
+                android:layout_marginTop="-30dp"
+                android:layout_marginStart="5dp"
+                android:text="System Settings"
+                android:textColor="@color/shadow"
+                android:textSize="14sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rl8"
+                android:layout_below="@+id/rl7"
+                android:background="@drawable/bg_whitebox"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="40dp"
+                android:padding="10dp"
+                android:translationZ="10dp">
+
+
+                <LinearLayout
+                    android:id="@+id/llU"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/txt_prevent_uninstall"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:text="Prevent App Unistall"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        />
+
+                   <androidx.appcompat.widget.AppCompatToggleButton
+                       android:id="@+id/toggle_aap_unistall"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:padding="5dp"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/llFR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/llU"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginBottom="5dp">
+
+                    <TextView
+                        android:id="@+id/txt_prevent_factory_rst"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:text="Prevent Factory Reset"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        />
+
+                    <androidx.appcompat.widget.AppCompatToggleButton
+                        android:id="@+id/toggle_factory_rst"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp" />
+
+
+                </LinearLayout>
+
+
+
+
+
+
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/tv_userDCopyright"

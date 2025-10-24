@@ -20,6 +20,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.AppCompatToggleButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -47,6 +48,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     TextView demail, dmodelName, dbuildNumber, dimei, dimei2, ddateOfPurchase, dtotalAmount, dadvanced, tvPhoneLock, tvSettingsLock, tvWhatsappLock, tvYoutubeLock, tvFacebookLock, tvInstaLock;
     ImageView back, customerProfile, ivphoneLock, ivsettings_lock;
     LinearLayout phoneLock, cameraLock, callLock, settingsLock, getSimDetails, getLocationDetails, whatsappLock, YoutubeLock, FacebookLock, InstaLock;
+    AppCompatToggleButton togglePrevUnis, togglePrevFactReset;
     Spinner paymentSpinner;
     com.google.android.material.textfield.TextInputEditText datetime;
     DatabaseReference commandsRef;
@@ -62,6 +64,10 @@ public class UserDetailsActivity extends AppCompatActivity {
     private boolean isYoutubeLocked = false;
     private boolean isFacebookLocked = false;
     private boolean isInstaLocked = false;
+    private boolean isPrevUnistall = true;
+    private boolean isPrevFactoryReset = true;
+
+
 
     @SuppressLint({"MissingInflatedId", "ResourceType"})
     @Override
@@ -94,6 +100,8 @@ public class UserDetailsActivity extends AppCompatActivity {
         dtotalAmount = findViewById(R.id.tv_DtotalAmount);
         dadvanced = findViewById(R.id.tv_DAdvancedPay);
         customerProfile = findViewById(R.id.iv_userPic);
+        togglePrevUnis = findViewById(R.id.toggle_aap_unistall);
+        togglePrevFactReset = findViewById(R.id.toggle_factory_rst);
 
 //        paymentSpinner = findViewById(R.id.paymentSpinner);
 //        datetime = findViewById(R.id.et_paiddatetime);
@@ -289,6 +297,42 @@ public class UserDetailsActivity extends AppCompatActivity {
             }
         }));
 
+        togglePrevUnis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isPrevUnistall = !isPrevUnistall;
+                if (isPrevUnistall){
+                    sendCommand("uninstall", "PREV_UNINSTALL_app");
+                    togglePrevUnis.setChecked(true);
+                    togglePrevUnis.setBackgroundResource(R.drawable.w_app_background);
+
+                }
+                else {
+                    sendCommand("uninstall", "UNINSTALL_app");
+                    togglePrevUnis.setChecked(false);
+                    togglePrevUnis.setBackgroundResource(R.drawable.r_app_background);
+                }
+            }
+        });
+
+        togglePrevFactReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                isPrevFactoryReset = !isPrevFactoryReset;
+                if (isPrevFactoryReset){
+                    sendCommand("factoryreset", "PREV_FACTORY_RESET");
+                    togglePrevFactReset.setChecked(true);
+                    togglePrevFactReset.setBackgroundResource(R.drawable.w_app_background);
+
+                }
+                else {
+                    sendCommand("factoryreset", "FACTORY_RESET");
+                    togglePrevFactReset.setChecked(false);
+                    togglePrevFactReset.setBackgroundResource(R.drawable.r_app_background);
+                }
+            }
+        });
+
         back.setOnClickListener(v-> finish());
 
 //        datetime.setOnClickListener(v -> {
@@ -478,6 +522,32 @@ public class UserDetailsActivity extends AppCompatActivity {
                         tvInstaLock.setText("Instagram\nLock");
                         InstaLock.setBackgroundResource(R.drawable.w_app_background);
                     }
+
+                    // UNITSTALL APP
+                    String unistallCommand = snapshot.child("uninstall").child("command").getValue(String.class);
+                    if ("PREV_UNINSTALL_app".equals(unistallCommand)) {
+                        isPrevUnistall = true;
+                        togglePrevUnis.setChecked(true);
+                        togglePrevUnis.setBackgroundResource(R.drawable.w_app_background);
+                    } else {
+                        isPrevUnistall = false;
+                        togglePrevUnis.setChecked(false);
+                        togglePrevUnis.setBackgroundResource(R.drawable.r_app_background);
+                    }
+
+
+                    // FACTORY RESET
+                    String factoryresetcommand = snapshot.child("factoryreset").child("command").getValue(String.class);
+                    if ("PREV_FACTORY_RESET".equals(factoryresetcommand)) {
+                        isPrevFactoryReset = true;
+                        togglePrevFactReset.setChecked(true);
+                        togglePrevFactReset.setBackgroundResource(R.drawable.w_app_background);
+                    } else {
+                        isPrevFactoryReset = false;
+                        togglePrevFactReset.setChecked(false);
+                        togglePrevFactReset.setBackgroundResource(R.drawable.r_app_background);
+                    }
+
                 }
 
                 @Override

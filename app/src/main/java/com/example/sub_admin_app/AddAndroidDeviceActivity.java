@@ -47,6 +47,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -320,20 +321,58 @@ public class AddAndroidDeviceActivity extends AppCompatActivity {
         step.setTextColor(Color.WHITE);
     }
 
-    private void setupStep4QR(View stepLayout){
+//    private void setupStep4QR(View stepLayout){
+//        tvQRCode = stepLayout.findViewById(R.id.txt_scanQRforinstallation);
+//        ivQRCode = stepLayout.findViewById(R.id.iv_picQR);
+//
+//        tvQRCode.setText("Generating QR code... Please wait.");
+//
+//        if (buyer.buyerId != null && !buyer.buyerId.isEmpty()) {
+//            generateQRCode(SubAdminID, buyer.buyerId);
+//            tvQRCode.setText("Scan this QR on customer phone to install app");
+//        } else {
+//            tvQRCode.setText("Error: Buyer ID not found. Please go back and complete all steps.");
+//            Log.e("STEP4", "Buyer ID is null or empty!");
+//        }
+//    }
+
+
+
+    private void setupStep4QR(View stepLayout) {
         tvQRCode = stepLayout.findViewById(R.id.txt_scanQRforinstallation);
         ivQRCode = stepLayout.findViewById(R.id.iv_picQR);
 
         tvQRCode.setText("Generating QR code... Please wait.");
 
         if (buyer.buyerId != null && !buyer.buyerId.isEmpty()) {
-            generateQRCode(SubAdminID, buyer.buyerId);
-            tvQRCode.setText("Scan this QR on customer phone to install app");
+            FirebaseStorage storage = FirebaseStorage.getInstance();
+
+            // The correct path reference in your Firebase Storage
+            StorageReference qrRef = storage.getReferenceFromUrl(
+                    "gs://smart-lock-25988.firebasestorage.app/QR/frame (6).png"
+            );
+
+            qrRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                tvQRCode.setText("Scan this QR on customer phone to install app");
+
+                Glide.with(stepLayout.getContext())
+                        .load(uri)
+                        .into(ivQRCode);
+
+            }).addOnFailureListener(e -> {
+                tvQRCode.setText("Failed to load QR code.");
+                Log.e("STEP4", "Error loading QR code: " + e.getMessage());
+            });
+
         } else {
             tvQRCode.setText("Error: Buyer ID not found. Please go back and complete all steps.");
             Log.e("STEP4", "Buyer ID is null or empty!");
         }
     }
+
+
+
+
 
     private void generateQRCode(String subAdminID, String buyerID) {
         try {

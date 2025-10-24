@@ -281,7 +281,6 @@ public class MainActivity extends AppCompatActivity {
         View view = getLayoutInflater().inflate(R.layout.bottom_sheet_menu, null);
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         dialog.setContentView(view);
-
         // Set onClickListeners for each item:
         view.findViewById(R.id.M_users).setOnClickListener(v -> {
             // Open Users
