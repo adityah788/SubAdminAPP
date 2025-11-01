@@ -1,22 +1,19 @@
 package com.example.sub_admin_app;
 
 import android.annotation.SuppressLint;
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
+import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
+import android.webkit.WebView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -30,16 +27,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
-
-import javax.annotation.Nullable;
 
 public class UserDetailsActivity extends AppCompatActivity {
 
@@ -47,7 +39,7 @@ public class UserDetailsActivity extends AppCompatActivity {
     TextView username, userphone, useraddress, copyRight, titleName, tvstatus;
     TextView demail, dmodelName, dbuildNumber, dimei, dimei2, ddateOfPurchase, dtotalAmount, dadvanced, tvPhoneLock, tvSettingsLock, tvWhatsappLock, tvYoutubeLock, tvFacebookLock, tvInstaLock;
     ImageView back, customerProfile, ivphoneLock, ivsettings_lock;
-    LinearLayout phoneLock, cameraLock, callLock, settingsLock, getSimDetails, getLocationDetails, whatsappLock, YoutubeLock, FacebookLock, InstaLock;
+    LinearLayout phoneLock, cameraLock, callLock, settingsLock, getSimDetails, getLocationDetails, whatsappLock, YoutubeLock, FacebookLock, InstaLock, currentLocation, txvdocuments;
     AppCompatToggleButton togglePrevUnis, togglePrevFactReset;
     Spinner paymentSpinner;
     com.google.android.material.textfield.TextInputEditText datetime;
@@ -102,6 +94,9 @@ public class UserDetailsActivity extends AppCompatActivity {
         customerProfile = findViewById(R.id.iv_userPic);
         togglePrevUnis = findViewById(R.id.toggle_aap_unistall);
         togglePrevFactReset = findViewById(R.id.toggle_factory_rst);
+        currentLocation = findViewById(R.id.currentLocation);
+        txvdocuments = findViewById(R.id.lld16);
+
 
 //        paymentSpinner = findViewById(R.id.paymentSpinner);
 //        datetime = findViewById(R.id.et_paiddatetime);
@@ -141,6 +136,10 @@ public class UserDetailsActivity extends AppCompatActivity {
         String paidEmis = getIntent().getStringExtra("paidEmis");
         String totalEmis = getIntent().getStringExtra("totalEmis");
         String profilePicRes = getIntent().getStringExtra("profilePicRes");
+        String aadharPicRes = getIntent().getStringExtra("aadharPicRes");
+        String contracrPicRes = getIntent().getStringExtra("contractPicRes");
+
+
 
         titleName.setText(name);
         username.setText(name);
@@ -207,7 +206,23 @@ public class UserDetailsActivity extends AppCompatActivity {
 //                // Do nothing
 //            }
 //        });
-        
+
+
+
+        txvdocuments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intentphotoview = new Intent(UserDetailsActivity.this, Documents.class);
+                intentphotoview.putExtra("userimg_url",profilePicRes);
+                intentphotoview.putExtra("aadhar_url",aadharPicRes);
+                intentphotoview.putExtra("contract_url",contracrPicRes);
+                startActivity(intentphotoview);
+
+            }
+        });
+
+
 
         phoneLock.setOnClickListener(v -> handleLockClick(phoneLock, () -> {
         isPhoneLocked = !isPhoneLocked;
@@ -335,6 +350,52 @@ public class UserDetailsActivity extends AppCompatActivity {
 
         back.setOnClickListener(v-> finish());
 
+
+        currentLocation.setOnClickListener(v -> {
+//            showMapDialog(30.7499, 76.6411);
+            String encodedBuildNumber1 = encodeFirebasePath(buildNumber);
+
+
+//            DatabaseReference buyerRef = FirebaseDatabase.getInstance()
+//                    .getReference("buyers")
+//                    .child(encodedBuildNumber1);
+
+
+            // Fix: Look in the correct database path where customer app updates location
+            Query buyerQuery = FirebaseDatabase.getInstance()
+                    .getReference("SubAdmins")
+                    .child(subAdminId)
+                    .child("buyers")
+                    .orderByChild("phoneBuild")
+                    .equalTo(buildNumber);
+
+            buyerQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    boolean locationFound = false;
+                    for (DataSnapshot buyerSnap : snapshot.getChildren()) {
+                        BuyerModel buyer = buyerSnap.getValue(BuyerModel.class);
+                        if (buyer != null && buyer.latitude != 0.0 && buyer.longitude != 0.0) {
+                            showMapDialog(buyer.latitude, buyer.longitude);
+                            locationFound = true;
+                            break;
+                        }
+                    }
+                    if (!locationFound) {
+                        Toast.makeText(UserDetailsActivity.this, "Buyer location not available", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(UserDetailsActivity.this, "Failed: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
+
+
+
+
 //        datetime.setOnClickListener(v -> {
 //            Calendar now = Calendar.getInstance();
 //            new DatePickerDialog(
@@ -384,6 +445,69 @@ public class UserDetailsActivity extends AppCompatActivity {
                         Toast.makeText(this, "Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show()
                 );
     }
+
+
+
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private void showMapDialog(double latitude, double longitude) {
+        Dialog dialog = new Dialog(this, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        dialog.setContentView(R.layout.dialog_fullscreen_map);
+
+        ImageView btnClose = dialog.findViewById(R.id.btnCloseDialog);
+        WebView webView = dialog.findViewById(R.id.webViewMap);
+
+        webView.getSettings().setJavaScriptEnabled(true);
+
+        // HTML + JS for OpenStreetMap using Leaflet + reverse geocoding
+        String html = "<!DOCTYPE html>" +
+                "<html>" +
+                "<head>" +
+                "  <meta name='viewport' content='width=device-width, initial-scale=1.0'>" +
+                "  <link rel='stylesheet' href='https://unpkg.com/leaflet/dist/leaflet.css' />" +
+                "  <script src='https://unpkg.com/leaflet/dist/leaflet.js'></script>" +
+                "  <style>html, body, #map { height: 100%; margin: 0; padding: 0; }</style>" +
+                "</head>" +
+                "<body>" +
+                "  <div id='map'></div>" +
+                "  <script>" +
+                "    var map = L.map('map').setView([" + latitude + ", " + longitude + "], 15);" +
+                "    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {" +
+                "      maxZoom: 19," +
+                "      attribution: '© OpenStreetMap'" +
+                "    }).addTo(map);" +
+                // Phone icon marker
+                "    var mobileIcon = L.icon({" +
+                "       iconUrl: 'https://cdn-icons-png.flaticon.com/512/9418/9418116.png'," +
+                "       iconSize: [45, 45]," +
+                "       iconAnchor: [22, 45]," +
+                "       popupAnchor: [0, -45]" +
+                "    });" +
+                // Create marker
+                "    var marker = L.marker([" + latitude + ", " + longitude + "], {icon: mobileIcon}).addTo(map);" +
+
+                // Fetch location name from OSM Nominatim (reverse geocode)
+                "    fetch('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=" + latitude + "&lon=" + longitude + "')" +
+                "      .then(response => response.json())" +
+                "      .then(data => {" +
+                "          var address = data.display_name || 'Unknown Location';" +
+                "          marker.bindPopup('<b>Location:</b><br>' + address);" +
+                "      })" +
+                "      .catch(err => {" +
+                "          marker.bindPopup('Unable to fetch address');" +
+                "      });" +
+                "  </script>" +
+                "</body>" +
+                "</html>";
+
+        webView.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null);
+
+        btnClose.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
+    }
+
+
 
 
     public static String encodeFirebasePath(String path) {

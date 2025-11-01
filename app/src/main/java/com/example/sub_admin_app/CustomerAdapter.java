@@ -84,6 +84,9 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.Custom
             intent.putExtra("totalEmis",customer.totalEmis);
             intent.putExtra("status", customer.agreed);
             intent.putExtra("profilePicRes", customer.userPicUrl); // optional
+            intent.putExtra("aadharPicRes", customer.docUrl); // optional
+            intent.putExtra("contractPicRes", customer.contractUrl); // optional
+
             context.startActivity(intent);
         });
 

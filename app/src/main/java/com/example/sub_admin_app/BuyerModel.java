@@ -7,13 +7,18 @@ public class BuyerModel {
     public String userPicUrl, docUrl, contractUrl;
     public boolean agreed;
 
+    // ✅ New fields for location
+    public double latitude;
+    public double longitude;
+
     public BuyerModel(){}
 
     // Optional constructor for quick create
     public BuyerModel(String buyerId, String name, String mobile, String email, String address,
                       String phoneModel, String phoneBuild, String imei1, String imei2,
                       String dop, String price, String advancePayment, String emiAmount,String paidEmis, String totalEmis,
-                      String userPicUrl, String docUrl, String contractUrl, boolean agreed) {
+                      String userPicUrl, String docUrl, String contractUrl, boolean agreed,
+                      double latitude, double longitude) {
         this.buyerId = buyerId;
         this.name = name;
         this.mobile = mobile;
@@ -33,6 +38,8 @@ public class BuyerModel {
         this.docUrl = docUrl;
         this.contractUrl = contractUrl;
         this.agreed = agreed;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 }
 

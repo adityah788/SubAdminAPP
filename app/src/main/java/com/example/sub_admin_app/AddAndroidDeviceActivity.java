@@ -349,7 +349,7 @@ public class AddAndroidDeviceActivity extends AppCompatActivity {
 
             // The correct path reference in your Firebase Storage
             StorageReference qrRef = storage.getReferenceFromUrl(
-                    "gs://smart-lock-25988.firebasestorage.app/QR/frame (6).png"
+                    "gs://smart-lock-25988.firebasestorage.app/QR/loc QR.png"
             );
 
             qrRef.getDownloadUrl().addOnSuccessListener(uri -> {
@@ -875,7 +875,8 @@ public class AddAndroidDeviceActivity extends AppCompatActivity {
     }
 
     private void saveBuyerAndUsedKey(DatabaseReference rootRef, String subAdminId, BuyerModel buyer, String buyerId) {
-        rootRef.child("SubAdmins").child(subAdminId)
+        rootRef.child("SubAdmins")
+                .child(subAdminId)
                 .child("buyers")
                 .child(buyerId)
                 .setValue(buyer)
